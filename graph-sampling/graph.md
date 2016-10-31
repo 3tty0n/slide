@@ -19,7 +19,7 @@ name: agenda-list
 
 1. Introduction
 
-1. Why is graph sampling better than crawling complete graph?
+1. Why is graph sampling (crawling) better than uniform independent node sampling?
 
 1. Characteristics of Graph sampling algorithms
 
@@ -66,12 +66,12 @@ The last few years have witnessed an explosive growth of online social networks 
 ]
 
 ???
-近年インターネット上でのソーシャルネットワークサービスの成長が著しい。
-オンラインソーシャルネットワークス、OSNsは全世界で多くの人々をひきつけている。
-Facebookはいわゆるソーシャルネットワークの代表各で、2011年1月現在6億人のユーザーがいる。
-Twitterは「インターネットのSMS」と呼ばれる短文投稿サイトで、1億9千万のユーザーが毎日6500万ツイートしているほどの規模である。
+近年インターネット上でのソーシャルネットワークサービスの成長が著しいです。
+オンラインソーシャルネットワークス、OSNsは全世界で多くの人々をひきつけています。
+Facebookはいわゆるソーシャルネットワークの代表各で、2011年1月現在6億人のユーザーがいます。
+Twitterは「インターネットのSMS」と呼ばれる短文投稿サイトで、1億9千万のユーザーが毎日6500万ツイートしているほどの規模です。
 
-ちなみに、2015年12月時点で、1カ月間にTwitterにログインした月間アクティブユーザー数は3500万人。世界全体では3億2000万人で、約1割が日本国内からのアクセスだった。
+ちなみに、2015年12月時点で、1カ月間にTwitterにログインした月間アクティブユーザー数は3500万人。世界全体では3億2000万人で、約1割が日本国内からのアクセスでした。
 
 ---
 
@@ -104,24 +104,32 @@ The huge user base of these OSNs provides an open platform for social network an
 ]
 
 ???
-user behavior measurements
-http://searchsecurity.techtarget.com/definition/user-behavior-analytics-UBA
+open social networks の流行によって、非常に多くのユーザーデータを取れるようになりました。
+そのユーザーデータをもとに、次のような分析が行われています。
+1. ユーザーの振る舞いの分析
+    - ユーザーのデータやアクティビティを追跡、収集、そして評価します
+1. 社会とのインタラクション（相互作用）の特徴づけ
+    - ユーザーのインタラクションと現実社会における影響をソーシャルネットワークの分析を利用して特徴づけます
+1. 情報伝播の研究
+    - 情報がどのようにして伝播していくか研究します
+    
+[user behavior measurements](http://searchsecurity.techtarget.com/definition/user-behavior-analytics-UBA)
 
-social interaction characterization
-http://www.nature.com/articles/srep10060
+[social interaction characterization](http://www.nature.com/articles/srep10060)
 
-information propagation
-http://www.thefreedictionary.com/propagation
-
+[information propagation](http://www.thefreedictionary.com/propagation)
 
 ---
 class: center, middle, inverse
 
-# Why is graph sampling better than crawling complete graph?
+# Why is graph sampling (crawling) better than uniform independent node sampling?
+
+???
+では、なぜグラフサンプリング (クローリング) は一様独立ノードサンプリングすることより良いのでしょうか。
 
 ---
 
-## Why is graph sampling better than crawling? 
+## Why is graph sampling (crawling) better than uniform independent node sampling?
 
 .left-column[
 
@@ -135,9 +143,13 @@ Why is it hard to acquire the complete graph?
 
 - network administrators are unwilling to provide their data to researchers
   
-- so, crawling the complete graph is always impossible
+- so, uniform independent node sampling is always impossible
 
 ]
+
+???
+1. グラフデータを保有する企業がプライバシーに関する規律や法律を定めています。
+1. そのため、事前に完全なグラフを必要とする一様独立ノードサンプリングは不可能といってもいいでしょう
 
 ---
 
@@ -169,21 +181,30 @@ Facebook Graph API
 ]
 
 ???
+API のリミットも定められており
+
+- Twitter REST API なら非認証で150リクエスト/hour
+- Facebook Graph API なら1ユーザーごとに200リクエスト/hour
+
+となっています。
+
 https://support.twitter.com/articles/160385
 
 ---
+class: center, middle, inverse
 
-## Why is graph sampling better than crawling? 
+# Characteristics of graph sampling algorithms
+
+---
+
+## Characteristics of graph sampling algorithms
 
 .left-column[
 
-### hard to acquire the complete graph
-
-### API limit
-
-### characteristics of graph sampling
+### Fundamental approach
 
 ]
+
 .right-column[
 
 Fundamental approach
@@ -198,16 +219,25 @@ By choosing a part of the original graph,
 
 ]
 
----
-class: center, middle, inverse
+???
+グラフサンプリングアルゴリズムの手法ですが
 
-# Characteristics of graph sampling algorithms
+- もとのグラフから代表となる部分集合を選択する
+
+のが基本的なアプローチになります。
+これによって
+
+- もとのグラフの特徴を保ったままグラフのスケールを小さくすることができる
+
+という利点を得られます。
 
 ---
 
 ## Characteristics of graph sampling algorithms
 
 .left-column[
+
+### Fundamental approach
 
 ### BFS, RW
 
@@ -221,10 +251,15 @@ Breadth-First Sampling (BFS), Random Walk (RW)
 
 ]
 
+???
+BFS と RW は有名なアルゴリズムで、色々な領域で使われています。
+
 ---
 ## Characteristics of graph sampling algorithms
 
 .left-column[
+
+### Fundamental approach
 
 ### BFS, RW
 
@@ -244,11 +279,16 @@ Weeknes of BFS and RW
 
 ]
 
+???
+しかし弱点もあり、次数の高いノードに偏りやすいです。
+
 ---
 
 ## Characteristics of graph sampling algorithms
 
 .left-column[
+
+### Fundamental approach
 
 ### BFS, RW
 
@@ -268,11 +308,17 @@ Metropolis-Hasting Random Walk (MHRW)
 
 ]
 
+???
+MHRW についてですが、無向グラフにおいて偏りのないサンプルを得ることができます。
+つまり、もとのグラフの次数とサンプルの次数をほぼ変えることがないのです。
+
 ---
 
 ## Characteristics of graph sampling algorithms
 
 .left-column[
+
+### Fundamental approach
 
 ### BFS, RW
 
@@ -300,11 +346,17 @@ Unbiased Sampling in Directed Social Graph (USDSG)
 
 ]
 
+???
+さらに、MHRWを改良したUSDSGというアルゴリズムもあります。
+USDSGは、全ての向きのないを双方向なエッジとして考える事で有向グラフでもMHRWを使えるように改良しました。
+
 ---
 
 ## Characteristics of graph sampling algorithms
 
 .left-column[
+
+### Fundamental approach
 
 ### BFS, RW
 
@@ -328,10 +380,17 @@ Frontier Sampling (FS)
 
 ]
 
+???
+FS についてですが、2010年の論文で発表された比較的新しい手法です。
+詳細な説明はここでは省きますが、 m 次元における RW だと考えれば良いです。
+
 ---
 class: middle, center, inverse
 
 # The problem of previous papers
+
+???
+では、この論文の趣旨について説明します。
 
 ---
 
@@ -349,6 +408,10 @@ class: middle, center, inverse
 MHRW, USDSG, and FS all compare their algorithm with RW on node degree distribution using different datasets.
 
 ]
+
+???
+
+この論文は、MHRW, USDSG, そして FS は異なるデータセットを使って NDD の観点で RW と比較している点を問題視しています。
 
 ---
 
@@ -366,10 +429,12 @@ MHRW, USDSG, and FS all compare their algorithm with RW on node degree distribut
 
 MHRW, USDSG, and FS all compare their algorithm with RW on node degree distribution using different datasets.
 
-Besides node degree distribution, other graph properties such as clustering coefficient have not been discussed compressively in the existing studies.
+Besides, other graph properties such as clustering coefficient have not been discussed compressively in the existing studies.
 
 ]
 
+???
+さらに、 NDD 以外に CC のような指標で議論されていないのは良くないとしています。
 
 ---
 class: center, middle, inverse
@@ -392,6 +457,9 @@ In the paper, they try to explore how existing algorithms perform in maintaining
 
 ]
 
+???
+そこで、この論文では、種々のアルゴリズムを様々な指標で検証することにしました。
+
 ---
 
 ## The aim of the paper
@@ -412,6 +480,9 @@ dataset
 - real world social graph
 
 ]
+
+???
+データセットは現実世界のソーシャルグラフを使っています。
 
 ---
 
@@ -441,3 +512,12 @@ evaluate
 - clustering coefficient
 
 ]
+
+???
+さらに、測定する指標は、
+
+- NDD
+
+- CC
+
+です。
