@@ -1,8 +1,15 @@
 name: top
 class: center, middle, inverse
 
-# I. Introduction
-## Yusuke Izawa
+# Understanding Graph Sampling Algorithms for Social Network Analysis  
+
+## I. Introduction
+
+### Yusuke Izawa
+
+.right[.bottom[
+made by [remark](https://github.com/gnab/remark/)
+]]
 
 ---
 name: agenda
@@ -494,7 +501,6 @@ dataset
 ### - dataset
 
 ### - evaluate
-
 ]
 
 .right-column[
